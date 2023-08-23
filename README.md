@@ -7,3 +7,5 @@ WS implemtation follows "A perfect smoother" by P. Eilers
 SASS implemntation follows "Sparsity-Assisted Signal Smoothing (Revisited)" by Ivan Selesnick
 
 BEADS implementation follows "Chromatogram baseline estimation and denoising using sparsity (BEADS)" by Xiaoran Ning, Ivan Selesnick, and Laurent Duval
+
+demo_script shows a use case on an experimental chromatogram of the different smoother-tuner combinations. 
