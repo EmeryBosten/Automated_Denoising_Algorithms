@@ -6,7 +6,7 @@
 % addition of gaussian noise
 clear
 % add path to data and functions 
-%addpath(genpath('...'))
+%addpath('...')
 
 load noise.mat
 load chromatograms.mat;
