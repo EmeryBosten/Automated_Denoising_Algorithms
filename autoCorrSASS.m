@@ -22,7 +22,7 @@ Ps = zeros([1, length(lambdas)]);
 for i = 1:length(lambdas)
     lam = lambdas(i);
     [z, ~, ~, ~, ~, ~] = sass_L1(y, d, fc, K, lam);
-    Ps(:,i) = autocorrelation(y-z,type);
+    Ps(:,i) = autocorrelation(y-z,'mean');
 end
 
 %Choose lambda
