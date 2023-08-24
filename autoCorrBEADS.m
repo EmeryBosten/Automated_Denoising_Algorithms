@@ -27,7 +27,7 @@ Ps = zeros([1, length(alphas)]);
 for i = 1:length(alphas)
     alpha = alphas(i);
     [z,b,~,~,~] = beads(y, d, fc, r, alpha, pen, Nit, EPS0, EPS1);
-    Ps(:,i) = autocorrelation(y-(z+b),type);
+    Ps(:,i) = autocorrelation(y-(z+b),'mean');
 end
 
 %Choose lambda
