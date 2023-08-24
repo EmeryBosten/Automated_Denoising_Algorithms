@@ -19,7 +19,7 @@ Ps = zeros([1, length(lambdas)]);
 for i = 1:length(lambdas)
     lam = lambdas(i);
     [z] = WSsparse(y', lam, d);
-    Ps(:,i) = autocorrelation(y-z,type);
+    Ps(:,i) = autocorrelation(y-z,'mean');
 end
 
 %Choose lambda
