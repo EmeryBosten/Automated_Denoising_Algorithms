@@ -19,7 +19,7 @@ order = 2;
 Ps = zeros([1, length(ws)]);
 for i = 1:length(ws)
     sgf = sgolayfilt(y,order,ws(i));
-    Ps(:,i) = autocorrelation(y-sgf,type);
+    Ps(:,i) = autocorrelation(y-sgf,'mean');
 end
 % Choose w
 [minval,i] = min(abs((Ps - p)));
