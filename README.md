@@ -1,6 +1,5 @@
 # Automated_Denoising_Algorithms
-Matlab codes to "Automated tuning of denoising algorithms for noise removal in liquid
-chromatography". 
+Matlab codes to "Automated tuning of denoising algorithms in liquid chromatography". 
 
 WS implemtation follows ***"A perfect smoother" by P. Eilers***
 
