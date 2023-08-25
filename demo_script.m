@@ -1,12 +1,13 @@
 %% Demonstration script for "Automated tuning of denoising algorithms for noise removal in liquid chromatography"
-% This script gives an example use case of the different smoother-tuner combinations on an example chromatogram 
+% This script gives an example use case of the different smoother-tuner combinations on an example chromatogram
+% Additionally an example of the use of power spectra of Fast Fourier Transform is included 
 %% Load data
 % data comes from paper 'Baseline correction using adaptive iteratively
 % reweighted penalized least squares' by Zhi-Min Zhang, Shan Chena and Yi-Zeng Liang  
 % addition of gaussian noise
 clear
 % add path to data and functions 
-%addpath('...')
+addpath(genpath('C:/Users/emery/OneDrive/Documents/MATLAB'))
 
 load noise.mat
 load chromatograms.mat;
@@ -24,6 +25,23 @@ plot(x)
 xlabel('time (sample)','FontSize',15)
 ylabel('Absorbance','FontSize',15)
 legend('noisy chromatogram','original chromatogram')
+%% show power spectra from FFT
+% Perform FFT on the signal
+signal = y;
+fs = 1; % sampling frequency
+
+[power_spectrum_noisy,f] = powerSpec(signal,fs); % power spectrum noisy chrom
+[power_spectrum_original,f] = powerSpec(x,fs); % power spectrum original chrom
+
+% Plot the power spectrum in log scale
+figure;
+plot(f, log(power_spectrum_original),'red','LineWidth',1.75);
+hold on 
+plot(f, log(power_spectrum_noisy),'blue','LineWidth',1.25);
+xlabel('Frequency (Hz)');
+ylabel('Power');
+set(findall(gcf,'-property','FontSize'),'FontSize',16)
+
 
 %% Initialization of parameter range
 % parameter range for Savitzky-Golay filter
@@ -233,6 +251,7 @@ title("RV-SASS median estimator")
 %% RV-BEADS
 % residual variance in combination with BEADS
 tic
+type = 'mean';
 [z,b] = resVarBEADS(y,BEADS_alphas,type);
 toc
 figure 
@@ -243,3 +262,16 @@ hold on
 plot(x)
 legend('noisy','estimated','origin')
 title("RV-BEADS median estimator") 
+
+% plot power spectrum of fft
+[power_spectrum,f] = powerSpec(z+b,fs); % power spectrum of denoised chrom
+
+% Plot the power spectrum in log scale
+figure;
+plot(f, log(power_spectrum_original), 'red', 'LineWidth',1.75);
+hold on
+plot(f, log(power_spectrum), 'black', 'LineWidth',1.25);
+xlabel('Frequency (Hz)');
+ylabel('Power');
+set(findall(gcf,'-property','FontSize'),'FontSize',16)
+
