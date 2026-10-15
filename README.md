@@ -14,6 +14,8 @@ Shan Chena and Yi-Zeng Liang***
 
 ## Demo
 
+
+##Load chromatogram
 ```Matlab
 
 %% Demonstration script for "Automated tuning of denoising algorithms for noise removal in liquid chromatography"
@@ -42,6 +44,12 @@ plot(x)
 xlabel('time (sample)','FontSize',15)
 ylabel('Absorbance','FontSize',15)
 legend('noisy chromatogram','original chromatogram')
+```
+<img width="1920" height="926" alt="original_chrom" src="https://github.com/user-attachments/assets/40d29abc-edcb-4495-9fc7-8a640d1abea3" />
+
+
+## Initialize parameters 
+```Matlab
 
 %% Initialization of parameter range
 % parameter range for Savitzky-Golay filter
@@ -55,6 +63,12 @@ BEADS_alphas = logspace(-3,3,25);
 %% Initialization of estimator type
 % select estimator type : 'median' or 'mean'
 type = 'median';
+```
+
+## Run different denoising methods 
+
+```Matlab
+
 %% Autocorrelation %%
 % autocorrelation function as parameter tuner 
 %% Auto-SG
@@ -62,53 +76,24 @@ type = 'median';
 tic
 z = autoCorrSG(y,SG_ws,type);
 toc
-figure 
-plot(y,'b')
-hold on 
-plot(z,'r')
-hold on
-plot(x)
-legend('noisy','estimated ','origin')
-title("Auto-SG median estimator")
+
 %% Auto-WS
 % autocorrelation function in combination with Whittaker smoother
 tic
 z = autoCorrWS(y,WS_lambdas,type);
 toc
-figure 
-plot(y,'b')
-hold on 
-plot(z,'r')
-hold on
-plot(x)
-legend('noisy','estimated','origin')
-title("Auto-WS median estimator")
+
 %% Auto-SASS
 % autocorrelation function in combination with SASS
 tic
 z = autoCorrSASS(y,SASS_lambdas,type);
 toc
-figure 
-plot(y,'b')
-hold on 
-plot(z,'r')
-hold on
-plot(x)
-legend('noisy','estimated','origin')
-title("Auto-SASS median estimator")
+
 %% Auto-BEADS
 % autocorrelation function in combination with BEADS
 tic
 [z,b] = autoCorrBEADS(y,BEADS_alphas,type);
 toc;
-figure 
-plot(y,'b')
-hold on 
-plot(z+b,'r')
-hold on
-plot(x)
-legend('noisy','estimated','origin')
-title("Auto-BEADS median estimator")
 
 %% Cross - validation %%
 % Cross-validation as parameter tuner 
@@ -119,53 +104,25 @@ K = 10;
 tic
 [z]= CVSG(y,SG_ws, K,type);
 toc
-figure
-plot(z)
-hold on
-plot(y)
-hold on
-plot(x)
-legend('estimated','noisy','origin')
-title('CV-SG median estimator')
+
 %% CV-WS
 % cross-validation in combination with Whittaker smoother
 tic
 [z] = CVWS(y,WS_lambdas, K, type);
 toc
-figure
-plot(z)
-hold on
-plot(y)
-hold on
-plot(x)
-legend('estimated','noisy','origin')
-title('CV-WS median estimator')
+
 %% CV-SASS
 % cross-validation in combination with SASS
 tic
 z = CVSASS(y,SASS_lambdas,K,type);
 toc
-figure
-plot(z)
-hold on
-plot(y)
-hold on
-plot(x)
-legend('estimated','noisy','origin')
-title('CV-SASS median estimator')
+
 %% CV-BEADS
 % cross-validation in combination with BEADS
 tic
 [z,b] = CVBEADS(y,BEADS_alphas,K,type);
 toc;
-figure
-plot(z+b)
-hold on
-plot(y)
-hold on
-plot(x)
-legend('estimated','noisy','origin')
-title('CV-BEADS median estimator')
+
 %% V-curve %%
 % V-curve as parameter tuner
 %% V-Curve-WS
@@ -173,40 +130,19 @@ title('CV-BEADS median estimator')
 tic
 z = VcurveWS(y,WS_lambdas);
 toc
-figure 
-plot(y,'b')
-hold on 
-plot(z,'r')
-hold on
-plot(x)
-legend('noisy','estimated','origin')
-title("V-Curve-WS median estimator")
+
 %% V-Curve-SASS
 % V-curve in combination with SASS
 tic
 z = VcurveSASS(y,SASS_lambdas);
 toc
-figure 
-plot(y,'b')
-hold on 
-plot(z,'r')
-hold on
-plot(x)
-legend('noisy','estimated','origin')
-title("V-Curve-SASS median estimator")
+
 %% LV-Curve-BEADS
 % V-curve in combination with BEADS
 tic
 [z,b] = VcurveBEADS(y,BEADS_alphas);
 toc
-figure 
-plot(y,'b')
-hold on 
-plot(z+b,'r')
-hold on
-plot(x)
-legend('noisy','estimated','origin')
-title('V-Curve-BEADS median estimator')
+
 %% residual Variance %%
 % residual variance as parameter tuner 
 %% RV-SG
@@ -214,53 +150,26 @@ title('V-Curve-BEADS median estimator')
 tic
 z = resVarSG(y,SG_ws,type);
 toc
-figure 
-plot(y,'b')
-hold on 
-plot(z,'r')
-hold on
-plot(x)
-legend('noisy','estimated','origin')
-title("RV-SG median estimator")
+
 %% RV-WS
 % residual variance in combination with Whittaker smoother
 tic
 z = resVarWS(y,WS_lambdas,type);
 toc
-figure 
-plot(y,'b')
-hold on 
-plot(z,'r')
-hold on
-plot(x)
-legend('noisy','estimated','origin')
-title("RV-WS median estimator")
+
 %% RV-SASS
 % residual variance in combination with SASS
 tic
 z = resVarSASS(y,SASS_lambdas,type);
 toc
-figure 
-plot(y,'b')
-hold on 
-plot(z,'r')
-hold on
-plot(x)
-legend('noisy','estimated','origin')
-title("RV-SASS median estimator")
+
 %% RV-BEADS
 % residual variance in combination with BEADS
 tic
 [z,b] = resVarBEADS(y,BEADS_alphas,type);
 toc
-figure 
-plot(y,'b')
-hold on 
-plot(z+b,'r')
-hold on
-plot(x)
-legend('noisy','estimated','origin')
-title("RV-BEADS median estimator") 
+<img width="1920" height="926" alt="original_chrom" src="https://github.com/user-attachments/assets/b859c10b-8f28-4bb0-a03e-2f3ad22f0caf" />
+
 ```
 
 ## License
