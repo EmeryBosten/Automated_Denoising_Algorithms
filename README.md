@@ -11,3 +11,16 @@ demo_script shows a use case on an experimental chromatogram (stored in data) of
 
 the experimental chromatogram comes from the paper ***"Baseline correction using adaptive iteratively reweighted penalized least squares" by Zhi-Min Zhang,
 Shan Chena and Yi-Zeng Liang*** 
+
+## License
+see details about the license at "PolyForm NonCommercial 1.0.0.txt"
+
+## Citation
+
+This code is part of the publication "Automated tuning of denoising algorithms for noise removal in chromatograms"
+
+If you use this work, make sure to cite it properly 
+Emery Bosten, Peter Van Broeck, Deirdre Cabooter,
+Automated tuning of denoising algorithms for noise removal in chromatograms,
+Journal of Chromatography A, Volume 1709, 2023, 464360,
+https://doi.org/10.1016/j.chroma.2023.464360.
