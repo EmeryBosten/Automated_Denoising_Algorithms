@@ -15,7 +15,7 @@ Shan Chena and Yi-Zeng Liang***
 ## Demo
 
 
-##Load chromatogram
+## Load chromatogram
 ```Matlab
 
 %% Demonstration script for "Automated tuning of denoising algorithms for noise removal in liquid chromatography"
@@ -168,7 +168,6 @@ toc
 tic
 [z,b] = resVarBEADS(y,BEADS_alphas,type);
 toc
-<img width="1920" height="926" alt="original_chrom" src="https://github.com/user-attachments/assets/b859c10b-8f28-4bb0-a03e-2f3ad22f0caf" />
 
 ```
 
